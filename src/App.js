@@ -62,7 +62,7 @@ class App extends Component {
 
     // ***** IMPORTANT ********, 
     // We need to generated key dynamically to reset the OpticalApp component.
-    let key = numberCircle + '-' + renderInterval;
+    let key = numberCircle;
 
     // Puting canvas outside the OpticalApp, so we don't have to redraw the canvas over and over again.
     return (
@@ -78,7 +78,8 @@ class App extends Component {
             onCircleColorChange={this.handleCircleColorChange}
           />
         </div>
-        <canvas id={myCanvasID}
+        <canvas 
+          id={myCanvasID}
           width={canvasWidth}
           height={canvasHeight} 
           style={{border: "1px solid #000", backgroundColor: "grey" }}>

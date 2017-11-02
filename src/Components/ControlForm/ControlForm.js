@@ -21,9 +21,7 @@ class ControlForm extends React.Component {
   }
 
   handleCircleColorChange(event) {
-    // if (event.target.value > 0) {
       this.props.onCircleColorChange(event.target.value);
-    // } 
   }
 
   render() {
