@@ -2,7 +2,7 @@ import React from 'react';
 
 class Cross extends React.Component {
   render() {
-    const canvas = document.getElementById(this.props.id);
+    const canvas = document.getElementById(this.props.myCanvasID);
     if (canvas !== null) {
       const ctx = canvas.getContext("2d");
       const len = this.props.len;

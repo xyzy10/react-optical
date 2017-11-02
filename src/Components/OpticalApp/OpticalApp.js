@@ -12,8 +12,8 @@ class OpticalApp extends React.Component {
 
   componentDidMount() {
     this.timerID = setInterval(
-      () => this.draw(),
-      this.props.renderTime
+      () => this.update(),
+      this.props.renderInterval
     );
   }
 
@@ -21,10 +21,10 @@ class OpticalApp extends React.Component {
     clearInterval(this.timerID);
   }
 
-  draw() {
+  update() {
     // To make animation smooth, we are going to reset the blinkIndex before the render the last circle.
     let blinkIndex = (this.state.blinkIndex === this.props.numberCircle - 1) ?  0 : this.state.blinkIndex + 1;
-    
+
     this.setState({
       blinkIndex: blinkIndex
     });
@@ -81,7 +81,7 @@ class OpticalApp extends React.Component {
       
       circles.push(
         <Circle
-            id={"myCanvas"} 
+            id={this.props.myCanvasID} 
             color={color} 
             x={x} 
             y={y}
@@ -93,14 +93,8 @@ class OpticalApp extends React.Component {
     
     return (
       <div>
-        <h3 id="message">Staring at the center of the screen. What color is the blinker?</h3>
-         <canvas id="myCanvas" 
-          width={canvasWidth} 
-          height={canvasHeight} 
-          style={{border: "1px solid #000", backgroundColor: this.props.canvasColor}}>
-        </canvas>
         {circles}
-        <Cross id="myCanvas" x={cx} y={cy} len={canvasHeight / 20} />
+        <Cross myCanvasID={this.props.myCanvasID} x={cx} y={cy} len={canvasHeight / 20} />
       </div>
     );
   }

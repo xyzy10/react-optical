@@ -3,9 +3,6 @@
   margin: 0 auto;
 }
 
-#message {
-  /* position: absolute;
-  top: 5%;
-  left: 5%; */
-  padding-left: 5%;
+.form {
+  padding: 2% 5%;
 }
