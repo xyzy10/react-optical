@@ -3,6 +3,7 @@ import OpticalApp from './Components/OpticalApp/OpticalApp';
 import logo from './logo.svg';
 import './App.css';
 import ControlForm from './Components/ControlForm/ControlForm';
+import Canvas from './Components/Canvas/Canvas';
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class App extends Component {
     const renderInterval = this.state.renderInterval;
     const circleColor = this.state.circleColor;
     const myCanvasID = "myCanvas";
+    const canvasBackgroundColor = "grey";
 
     // Clear the canvas after each reload(reset) of the compoent, otherwise it gonna be messy.
     // The reload is caused by changing the compoent key={key}. 
@@ -78,12 +80,10 @@ class App extends Component {
             onCircleColorChange={this.handleCircleColorChange}
           />
         </div>
-        <canvas 
-          id={myCanvasID}
-          width={canvasWidth}
-          height={canvasHeight} 
-          style={{border: "1px solid #000", backgroundColor: "grey" }}>
-        </canvas>
+        <Canvas
+          myCanvasID={myCanvasID}
+          canvasStyle={{border: "1px solid black", backgroundColor: canvasBackgroundColor}}
+        />
         <OpticalApp
           key={key}
           myCanvasID={myCanvasID}
@@ -91,7 +91,7 @@ class App extends Component {
           circleColor={circleColor}
           canvasWidth={canvasWidth} 
           canvasHeight={canvasHeight}
-          canvasColor={"grey"}
+          canvasColor={canvasBackgroundColor}
           renderInterval={renderInterval}
         />
       </div>
