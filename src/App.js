@@ -11,6 +11,7 @@ class App extends Component {
     this.handleRenderIntervalChange = this.handleRenderIntervalChange.bind(this);
     this.handleCircleColorChange = this.handleCircleColorChange.bind(this);
 
+    // Default values.
     this.state = {
       numberCircle: 24,
       renderInterval: 200,
@@ -37,6 +38,7 @@ class App extends Component {
   }
 
   render() {
+    // Make it fullscreen.
     let canvasHeight = window.innerHeight;
     let canvasWidth = window.innerWidth;
 
@@ -44,21 +46,25 @@ class App extends Component {
       canvasWidth = window.innerWidth;
     }
 
+    // Seting up variables.
     const numberCircle = this.state.numberCircle;
     const renderInterval = this.state.renderInterval;
     const circleColor = this.state.circleColor;
     const myCanvasID = "myCanvas";
 
-    // Reset the canvas.
+    // Clear the canvas after each reload(reset) of the compoent, otherwise it gonna be messy.
+    // The reload is caused by changing the compoent key={key}. 
     const canvas = document.getElementById(myCanvasID);
     if (canvas !== null) {
       const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // Very important, we need to generated key dynamically to reset the OpticalApp component.
+    // ***** IMPORTANT ********, 
+    // We need to generated key dynamically to reset the OpticalApp component.
     let key = numberCircle + '-' + renderInterval;
 
+    // Puting canvas outside the OpticalApp, so we don't have to redraw the canvas over and over again.
     return (
       <div id="AppContainer" >
         <div class="form">
@@ -72,8 +78,8 @@ class App extends Component {
             onCircleColorChange={this.handleCircleColorChange}
           />
         </div>
-        <canvas id={myCanvasID} 
-          width={canvasWidth} 
+        <canvas id={myCanvasID}
+          width={canvasWidth}
           height={canvasHeight} 
           style={{border: "1px solid #000", backgroundColor: "grey" }}>
         </canvas>
