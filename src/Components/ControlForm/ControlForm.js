@@ -5,10 +5,11 @@ class ControlForm extends React.Component {
     super(props);
     this.handleNumberCircleChange = this.handleNumberCircleChange.bind(this);
     this.handleRenderIntervalChange = this.handleRenderIntervalChange.bind(this);
+    this.handleCircleColorChange = this.handleCircleColorChange.bind(this);
   }
 
   handleNumberCircleChange(event) {
-    if (event.target.value < 3000 && event.target.value > 0) {
+    if (event.target.value < 1000 && event.target.value > 0) {
       this.props.onNumCircleChange(event.target.value);
     }
   }
@@ -17,6 +18,12 @@ class ControlForm extends React.Component {
     if (event.target.value > 0) {
       this.props.onRenderIntervalChange(event.target.value);
     }
+  }
+
+  handleCircleColorChange(event) {
+    // if (event.target.value > 0) {
+      this.props.onCircleColorChange(event.target.value);
+    // } 
   }
 
   render() {
@@ -29,6 +36,15 @@ class ControlForm extends React.Component {
         <label>
           Speed (in milliseconds):
           <input type="number" value={this.props.renderInterval} onChange={this.handleRenderIntervalChange} />
+        </label>
+        <label>
+          Color:
+          <select value={this.props.circleColor} onChange={this.handleCircleColorChange}>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="magenta">mangenta</option>
+          </select>
         </label>
       </form>
     );

@@ -7,16 +7,18 @@ import ControlForm from './Components/ControlForm/ControlForm';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleOnNumCircleChange = this.handleOnNumCircleChange.bind(this);
+    this.handleNumCircleChange = this.handleNumCircleChange.bind(this);
     this.handleRenderIntervalChange = this.handleRenderIntervalChange.bind(this);
+    this.handleCircleColorChange = this.handleCircleColorChange.bind(this);
 
     this.state = {
-      numberCircle: 12,
-      renderInterval: 1000
+      numberCircle: 24,
+      renderInterval: 200,
+      circleColor: 'red'
     };
   }
 
-  handleOnNumCircleChange(numberCircle) {
+  handleNumCircleChange(numberCircle) {
     this.setState({
       numberCircle: numberCircle
     });
@@ -25,6 +27,12 @@ class App extends Component {
   handleRenderIntervalChange(renderInterval) {
     this.setState({
       renderInterval: renderInterval
+    });
+  }
+
+  handleCircleColorChange(circleColor) {
+    this.setState({
+      circleColor: circleColor
     });
   }
 
@@ -38,6 +46,7 @@ class App extends Component {
 
     const numberCircle = this.state.numberCircle;
     const renderInterval = this.state.renderInterval;
+    const circleColor = this.state.circleColor;
     const myCanvasID = "myCanvas";
 
     // Reset the canvas.
@@ -47,17 +56,20 @@ class App extends Component {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    // Very important, we need to generated key dynamically to reset the OpticalApp component.
     let key = numberCircle + '-' + renderInterval;
 
     return (
       <div id="AppContainer" >
         <div class="form">
-          <h3 id="message">Staring at the center of the screen. What color is the blinker?</h3>
+          <h3 id="message">Staring at the center of the screen. What color is blinking?</h3>
           <ControlForm
             numberCircle={numberCircle}
+            circleColor={circleColor}
             renderInterval={renderInterval}
-            onNumCircleChange={this.handleOnNumCircleChange}
+            onNumCircleChange={this.handleNumCircleChange}
             onRenderIntervalChange={this.handleRenderIntervalChange}
+            onCircleColorChange={this.handleCircleColorChange}
           />
         </div>
         <canvas id={myCanvasID} 
@@ -69,7 +81,7 @@ class App extends Component {
           key={key}
           myCanvasID={myCanvasID}
           numberCircle={numberCircle}
-          circleColor={"magenta"}
+          circleColor={circleColor}
           canvasWidth={canvasWidth} 
           canvasHeight={canvasHeight}
           canvasColor={"grey"}
