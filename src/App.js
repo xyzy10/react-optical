@@ -5,21 +5,23 @@ import './App.css';
 
 class App extends Component {
   render() {
+    let canvasHeight = window.innerHeight;
+    let canvasWidth = window.innerWidth;
+
+    if (canvasHeight > canvasWidth) {
+      canvasWidth = window.innerWidth;
+    }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Optioal Illusions</h1>
-        </header>
-        <p className="App-intro">
-         <OpticalApp 
+      <div id="AppContainer">
+        <OpticalApp 
           numberCircle={12}
           circleColor={"magenta"}
-          canvasWidth={600} 
+          canvasWidth={canvasWidth} 
+          canvasHeight={canvasHeight}
           canvasColor={"grey"}
-          renderTime={300}
-         />
-        </p>
+          renderTime={1000}
+        />
       </div>
     );
   }

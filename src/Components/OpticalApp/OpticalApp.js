@@ -6,7 +6,6 @@ class OpticalApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
       blinkIndex: 0
     };
   }
@@ -27,7 +26,6 @@ class OpticalApp extends React.Component {
     let blinkIndex = (this.state.blinkIndex === this.props.numberCircle - 1) ?  0 : this.state.blinkIndex + 1;
     
     this.setState({
-      date: new Date(),
       blinkIndex: blinkIndex
     });
   }
@@ -35,11 +33,20 @@ class OpticalApp extends React.Component {
   render() {
     const circles = [];
     const canvasWidth = this.props.canvasWidth;
-    const canvasHeight = canvasWidth;
-    const circleradius = canvasWidth / 50;
+    const canvasHeight = this.props.canvasHeight;
 
+    let r = 0;
+    let circleradius = 0;
+    
     // The radius of the middle circle
-    const r = canvasWidth / 3;
+    if (canvasHeight > canvasWidth) {
+      r = canvasWidth / 2.8;
+      circleradius = canvasWidth / 45;
+    } else {
+      r = canvasHeight / 2.8;
+      circleradius = canvasHeight / 45;
+    }
+    
     // The location of the center point of the middle circle
     const cx = canvasWidth / 2;
     const cy = canvasHeight / 2;
@@ -86,14 +93,14 @@ class OpticalApp extends React.Component {
     
     return (
       <div>
+        <h3 id="message">Staring at the center of the screen. What color is the blinker?</h3>
          <canvas id="myCanvas" 
           width={canvasWidth} 
           height={canvasHeight} 
           style={{border: "1px solid #000", backgroundColor: this.props.canvasColor}}>
         </canvas>
         {circles}
-        <Cross id="myCanvas" x={cx} y={cy} len={canvasWidth / 20} />
-        <h2>{this.state.date.toLocaleTimeString()}</h2>
+        <Cross id="myCanvas" x={cx} y={cy} len={canvasHeight / 20} />
       </div>
     );
   }
